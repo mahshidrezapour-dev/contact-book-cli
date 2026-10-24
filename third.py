@@ -3,19 +3,31 @@
 #با exit  خارج میشه
 
 def contacts():
-    name=input("name:")
-    number=input("number:")
-    while not number.isdigit():
-        print("invalid number")
-        number=input("number:")
-    print("valid number")
+    while True:
+        name=input("name:").strip()
+        if name:
+            break
+        print("name cannot be empty")
+    while True:
+        number=input("number:").strip()
+        if number.isdigit() and 7<= len(number) <= 11:
+            break
+        print("please enter a valid phone number")
     phone={
         "name": name ,
         "number": number
     }
     return phone
 all_contacts={}
-i=int(input("how many contacts do you have ? >>>"))
+while True:
+    try:
+        i=int(input("how many contacts do you have ? >>>"))
+        if i <0:
+            print("number of contacts cannot be negative")
+        else:
+            break
+    except ValueError:
+        print("please enter a valid integer")
 
 for count in range(i):
     person=contacts()
@@ -55,8 +67,5 @@ while menu.lower()!="exit":
             print(all_contacts[place]["number"])
         else:
             print("not found")
-
-    elif menu.lower()=="exit":
-        break
     else:
         print("not found")
